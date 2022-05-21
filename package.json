@@ -1,0 +1,35 @@
+{
+  "name": "bsocket",
+  "version": "0.1.0",
+  "description": "Packaging of Bilibili Live WebSocket",
+  "main": "index.cjs",
+  "exports": {
+    "import": "./index.mjs",
+    "require": "./index.cjs"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Qyir/BSocket.git"
+  },
+  "keywords": [
+    "bilibili",
+    "websocket",
+    "live",
+    "ws",
+    "bs",
+    "bsocket"
+  ],
+  "author": "QoQiyu",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Qyir/BSocket/issues"
+  },
+  "homepage": "https://github.com/Qyir/BSocket#readme",
+  "dependencies": {
+    "axios": "^0.27.2",
+    "ws": "^8.6.0"
+  }
+}
