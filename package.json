@@ -1,6 +1,6 @@
 {
-  "name": "bsocket",
-  "version": "0.1.0",
+  "name": "b-socket",
+  "version": "0.1.1",
   "description": "Packaging of Bilibili Live WebSocket",
   "main": "index.cjs",
   "exports": {

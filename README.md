@@ -9,7 +9,7 @@ BSocket 是 Bilibili 直播开放平台 WebSocket 长连接封装包，目前可
 ## Install
 
 ```
-npm i bsocket --save
+npm i b-socket --save
 ```
 
 ## Usage
@@ -19,13 +19,13 @@ npm i bsocket --save
 如果使用 ESM 模块管理，请通过 import 语句引入。
 
 ```javascript
-import BSocket from "bsocket"
+import BSocket from "b-socket"
 ```
 
 如果使用 CommonJS 模块管理，请通过 require 语句引入。
 
 ```javascript
-const BSocket = require("bsocket")
+const BSocket = require("b-socket")
 ```
 
 ### 2. BSocket 类
@@ -134,7 +134,7 @@ data = {
 ### 较为完整的使用过程……？
 
 ```javascript
-import BSocket from "bsocket"
+import BSocket from "b-socket"
 
 BSocket.appKey = "bbtv233"
 BSocket.appSecret = "anhao666"
