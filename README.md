@@ -42,7 +42,7 @@ const BSocket = require("b-socket")
 
 `api` - 属性 | 请求地址，不作修改，默认为 `/v1/common/websocketInfo`
 
-`connect()` - 方法 | 创建并返回一个 `BilibiliWebSocket` 实例
+`build()` - 方法 | 创建并返回一个 `BilibiliWebSocket` 实例
 
 例：
 
@@ -52,13 +52,41 @@ BSocket.appSecret = "anhao666"
 BSocket.bodyData = { "room_id": 9007928 }
 
 // async
-const bs = await BSocket.connect()
+const bs = await BSocket.build()
 
 // or promise
-BSocket.connect()
+BSocket.build()
     .then(r => {
         ...//do something
     })
+```
+
+#### 一步到位!
+
+`oneStepOpen(callback)` - 方法 | 一步启动，参数：
+- `callback` - 监听消息函数回调，函数参数 `data`，用于处理监听接收到的弹幕礼物消息。等同于 `BilibiliWebSocket` 实例的 `listenMsgs` 方法。
+
+例：
+```javascript
+// give a callback, then get the danmu and user
+BSocket.oneStepOpen(data => {
+    console.log(data.data.uname)    // 漆与丶QoQ
+    console.log(data.data.uid)      // 8****8
+    console.log(data.data.msg)      // "test"
+})
+```
+
+`oneStepClose([callback[, ...args]])` - 方法 | 一步关闭，可选参数：
+- `callback` - 关闭连接函数回调，可以断开连接时处理一些事情；
+- `args` - 函数回调的可选参数数组。
+
+例：
+```javascript
+// close the connect
+BSocket.oneStepClose()
+
+// or give a callback
+BSocket.oneStepClose(stringArr => console.log(stringArr[0]), "Closed.")
 ```
 
 ### BilibiliWebSocket 实例
@@ -67,27 +95,27 @@ BSocket.connect()
 
 `websocketInfo` - 属性 | post 鉴权请求成功后返回的数据，详见 🔗 [获取长连地址和TOKEN](https://open-live.bilibili.com/document/doc&tool/api/websocket.html#_1-%E8%8E%B7%E5%8F%96%E9%95%BF%E8%BF%9E%E5%9C%B0%E5%9D%80%E5%92%8Ctoken)
 
-`Open([host, [port]])` - 方法 | 启动连接。可选参数：
+`open([host, [port]])` - 方法 | 启动连接。可选参数：
 - `host` - 长连接地址，可以在 `websocketInfo` 中获取；
 - `port` - 长连接端口，同样在 `websocketInfo` 中获取。
 
 例：
 ```javascript
 // use the default
-bs.Open()
+bs.open()
 
 // or use data from websocketInfo
-bs.Open("broadcastlv.chat.bilibili.com", 2243)
+bs.open("broadcastlv.chat.bilibili.com", 2243)
 
 // or promise
-BSocket.connect()
+BSocket.build()
     .then(r => {
-        r.Open()
+        r.open()
         ...//do something
     })
 ```
 
-`Close()` - 方法 | 关闭连接。
+`close()` - 方法 | 关闭连接。
 
 `getGeneralMsgs()` - 方法
 - 获取一般 Proto 包消息（非弹幕礼物），如鉴权反馈、心跳反馈，详见 🔗 [发送心跳](https://open-live.bilibili.com/document/doc&tool/api/websocket.html#_3-%E5%8F%91%E9%80%81%E5%BF%83%E8%B7%B3) `Operation` 字段含义。返回值是一个长度为4的数组。
@@ -97,15 +125,12 @@ BSocket.connect()
 
 `getWSURL()` - 方法 | 获取当前长连接链接地址.
 
-`listenMsgs([callback])` - 方法 | 监听消息。可选参数：
+`listenMsgs(callback)` - 方法 | 监听消息。参数：
 - `callback` - 回调函数，函数参数 `data`，用于处理监听接收到的弹幕礼物消息。
 
 例：
 ```javascript
-// will print messages in console
-bs.listenMsgs()
-
-// or give a callback, then get the danmu and user
+// give a callback, then get the danmu and user
 bs.listenMsgs(data => {
     console.log(data.data.uname)    // 漆与丶QoQ
     console.log(data.data.uid)      // 8****8
@@ -140,9 +165,9 @@ BSocket.appKey = "bbtv233"
 BSocket.appSecret = "anhao666"
 BSocket.bodyData = { "room_id": 9007928 }
 
-const bs = await BSocket.connect()
+const bs = await BSocket.build()
 
-bs.Open()
+bs.open()
 
 const arrMsgs = []
 
@@ -157,7 +182,9 @@ bs.listenMsgs(data => {
     }
 })
 
-// do something
+// do something...
+
+bs.close()
 ```
 
 ## Contribute
