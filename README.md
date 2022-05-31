@@ -44,7 +44,7 @@ const BSocket = require("b-socket")
 
 `api` - 属性 | 请求地址，不作修改，默认为 `/v1/common/websocketInfo`
 
-`build()` - 方法 | 创建并返回一个 `BilibiliWebSocket` 实例
+`build()` - 异步方法 | 创建并返回一个 `BilibiliWebSocket` 实例
 
 例：
 
@@ -65,13 +65,13 @@ BSocket.build()
 
 #### 一步到位!
 
-`oneStepOpen(callback)` - 方法 | 一步启动，参数：
+`oneStepOpen(callback)` - 异步方法 | 一步启动，参数：
 - `callback` - 监听消息函数回调，函数参数 `data`，用于处理监听接收到的弹幕礼物消息。等同于 `BilibiliWebSocket` 实例的 `listenMsgs` 方法。
 
 例：
 ```javascript
 // give a callback, then get the danmu and user
-BSocket.oneStepOpen(data => {
+await BSocket.oneStepOpen(data => {
     console.log(data.data.uname)    // 漆与丶QoQ
     console.log(data.data.uid)      // 8****8
     console.log(data.data.msg)      // "test"
