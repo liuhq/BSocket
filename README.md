@@ -6,6 +6,8 @@ BSocket 是 Bilibili 直播开放平台 WebSocket 长连接封装包，目前可
 
 ---
 
+[Changlog](CHANGELOG.md)
+
 ## Install
 
 ```
